@@ -1,97 +1,47 @@
-.. zephyr:code-sample:: blinky
-   :name: Blinky
-   :relevant-api: gpio_interface
+# Mini Sumo Robot – Zephyr RTOS
 
-   Blink an LED forever using the GPIO API.
+This repository contains the firmware for a **Mini Sumo robot** developed using **Zephyr RTOS**, focused on embedded systems concepts such as real-time control, GPIO, PWM, and sensor integration.
 
-Overview
-********
+## Features
 
-The Blinky sample blinks an LED forever using the :ref:`GPIO API <gpio_api>`.
+* Zephyr RTOS–based embedded application
+* Motor control using PWM (H-bridge)
+* IR sensors for opponent and edge detection
+* Modular code structure (motors, sensors, control logic)
+* Target board: **STM32 Blackpill F401CC**
 
-The source code shows how to:
+## Project Structure
 
-#. Get a pin specification from the :ref:`devicetree <dt-guide>` as a
-   :c:struct:`gpio_dt_spec`
-#. Configure the GPIO pin as an output
-#. Toggle the pin forever
+```
+├── src/            # Application source code
+│   ├── main.c
+│   ├── motor.c/.h
+│   ├── sensors.c/.h
+│   └── leds.c/.h
+├── boards/         # Board-specific overlays
+├── prj.conf        # Zephyr configuration
+├── CMakeLists.txt
+└── west-manifest/  # West workspace configuration
+```
 
-See :zephyr:code-sample:`pwm-blinky` for a similar sample that uses the PWM API instead.
+## Build & Flash
 
-.. _blinky-sample-requirements:
+```bash
+west build -b blackpill_f401cc
+west flash
+```
 
-Requirements
-************
+## Requirements
 
-Your board must:
+* Zephyr RTOS
+* West tool
+* ARM GCC toolchain
+* STM32 programmer (ST-Link)
 
-#. Have an LED connected via a GPIO pin (these are called "User LEDs" on many of
-   Zephyr's :ref:`boards`).
-#. Have the LED configured using the ``led0`` devicetree alias.
+## Goal
 
-Building and Running
-********************
+Academic and practical study of **embedded systems** and **real-time operating systems** applied to autonomous robotics.
 
-Build and flash Blinky as follows, changing ``reel_board`` for your board:
+---
 
-.. zephyr-app-commands::
-   :zephyr-app: samples/basic/blinky
-   :board: reel_board
-   :goals: build flash
-   :compact:
-
-After flashing, the LED starts to blink and messages with the current LED state
-are printed on the console. If a runtime error occurs, the sample exits without
-printing to the console.
-
-Build errors
-************
-
-You will see a build error at the source code line defining the ``struct
-gpio_dt_spec led`` variable if you try to build Blinky for an unsupported
-board.
-
-On GCC-based toolchains, the error looks like this:
-
-.. code-block:: none
-
-   error: '__device_dts_ord_DT_N_ALIAS_led_P_gpios_IDX_0_PH_ORD' undeclared here (not in a function)
-
-Adding board support
-********************
-
-To add support for your board, add something like this to your devicetree:
-
-.. code-block:: DTS
-
-   / {
-   	aliases {
-   		led0 = &myled0;
-   	};
-
-   	leds {
-   		compatible = "gpio-leds";
-   		myled0: led_0 {
-   			gpios = <&gpio0 13 GPIO_ACTIVE_LOW>;
-                };
-   	};
-   };
-
-The above sets your board's ``led0`` alias to use pin 13 on GPIO controller
-``gpio0``. The pin flags :c:macro:`GPIO_ACTIVE_LOW` mean the LED is on when
-the pin is set to its low state, and off when the pin is in its high state.
-
-Tips:
-
-- See :dtcompatible:`gpio-leds` for more information on defining GPIO-based LEDs
-  in devicetree.
-
-- If you're not sure what to do, check the devicetrees for supported boards which
-  use the same SoC as your target. See :ref:`get-devicetree-outputs` for details.
-
-- See :zephyr_file:`include/zephyr/dt-bindings/gpio/gpio.h` for the flags you can use
-  in devicetree.
-
-- If the LED is built in to your board hardware, the alias should be defined in
-  your :ref:`BOARD.dts file <devicetree-in-out-files>`. Otherwise, you can
-  define one in a :ref:`devicetree overlay <set-devicetree-overlays>`.
+Developed for learning and experimentation with Zephyr RTOS.
