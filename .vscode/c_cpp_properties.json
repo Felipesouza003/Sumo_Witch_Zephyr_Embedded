@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "name": "Zephyr",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/zephyr/include",
+                "${workspaceFolder}/modules/**",
+                "${workspaceFolder}/build/zephyr/include/generated",
+                "${workspaceFolder}/build/modules/**"
+            ],
+            "defines": [
+                "CONFIG_BOARD=\"blackpill_f401cc\""
+            ],
+            "compilerPath": "/usr/bin/arm-none-eabi-gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-arm"
+        }
+    ],
+    "version": 4
+}
