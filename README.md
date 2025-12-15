@@ -24,11 +24,11 @@ This repository contains the firmware for a **Mini Sumo robot** developed using 
 └── west-manifest/  # West workspace configuration
 ```
 
-## Build & Flash
+## Build & Debug
 
 ```bash
 west build -b blackpill_f401cc
-west flash
+west debug
 ```
 
 ## Requirements
