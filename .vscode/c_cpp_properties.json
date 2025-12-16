@@ -15,8 +15,14 @@
             "compilerPath": "/usr/bin/arm-none-eabi-gcc",
             "cStandard": "c11",
             "cppStandard": "c++17",
-            "intelliSenseMode": "gcc-arm"
+            "intelliSenseMode": "gcc-arm",
+            "compileCommands": "${workspaceFolder}/build/compile_commands.json"
         }
     ],
-    "version": 4
+    "version": 4,
+    "cmake": {
+        "configureArgs": [
+            "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
+        ]
+    }
 }

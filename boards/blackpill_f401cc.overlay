@@ -7,11 +7,11 @@
         status = "okay";
 
         sp_le: sp_le {
-            gpios = <&gpioa 5 GPIO_ACTIVE_HIGH>;
+            gpios = <&gpioa 5 (GPIO_PULL_DOWN | GPIO_ACTIVE_HIGH)>;
             label = "sp_le";
         };
         sp_ld: sp_ld {
-            gpios = <&gpioa 1 GPIO_ACTIVE_HIGH>;
+            gpios = <&gpioa 1 (GPIO_PULL_DOWN | GPIO_ACTIVE_HIGH)>;
             label = "sp_ld";
         };
         sp_fe: sp_fe {
@@ -187,5 +187,18 @@
     
     tim4_ch2_pb7: tim4_ch2_pb7 {//flag_d
         pinmux = <STM32_PINMUX('B', 7, AF2)>;
+    };
+};
+&adc1 {
+    status = "okay";
+    #address-cells = <1>;
+    #size-cells = <0>;
+    
+    channel@0 {
+        reg = <0>;
+        zephyr,gain = "ADC_GAIN_1";
+        zephyr,reference = "ADC_REF_INTERNAL";
+        zephyr,acquisition-time = <ADC_ACQ_TIME_DEFAULT>;
+        zephyr,resolution = <12>;
     };
 };
