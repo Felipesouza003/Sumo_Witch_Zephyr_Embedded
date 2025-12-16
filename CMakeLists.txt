@@ -1,14 +1,10 @@
 # SPDX-License-Identifier: Apache-2.0
-
 cmake_minimum_required(VERSION 3.20.0)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(BOARD blackpill_f401cc)
 find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 project(sumo_zephyr)
 
 target_sources(app PRIVATE
     src/main.c
-    src/sensors.c
-    src/leds.c
-    src/motor.c
 )
-# SPDX-License-Identifier: Apache-2.0
-set(BOARD blackpill_f401cc)
